@@ -1,7 +1,12 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
+import { fromZodError } from "@/lib/errors";
+import { deliveryTransitionSchema } from "@/lib/validation/schemas";
+import {
+  transitionDeliveryOrderStatus,
+  transitionSuccessMessage,
+} from "@/services/delivery.service";
 
 export type DeliveryTransitionState = {
   success: boolean;
@@ -12,48 +17,33 @@ export async function transitionDeliveryStatus(
   _previousState: DeliveryTransitionState,
   formData: FormData,
 ): Promise<DeliveryTransitionState> {
-  const orderId = String(formData.get("orderId") ?? "").trim();
-  const toStatus = String(formData.get("toStatus") ?? "").trim();
-
-  if (!orderId || !toStatus) {
-    return {
-      success: false,
-      message: "Missing delivery transition information.",
-    };
-  }
-
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser();
-
-  if (userError || !user) {
-    return {
-      success: false,
-      message: "Authentication required.",
-    };
-  }
-
-  const { error } = await supabase.rpc("transition_laundry_status", {
-    p_order_id: orderId,
-    p_to_status: toStatus,
-    p_changed_by: user.id,
-    p_reason: null,
+  const parsed = deliveryTransitionSchema.safeParse({
+    orderId: String(formData.get("orderId") ?? ""),
+    targetStatus: String(formData.get("toStatus") ?? ""),
+    reason: String(formData.get("reason") ?? "").trim() || undefined,
   });
 
-  if (error) {
+  if (!parsed.success) {
     return {
       success: false,
-      message: error.message,
+      message: fromZodError(parsed.error).message,
+    };
+  }
+
+  const result = await transitionDeliveryOrderStatus(parsed.data);
+
+  if (!result.success) {
+    return {
+      success: false,
+      message: result.error.message,
     };
   }
 
   revalidatePath("/delivery");
+  revalidatePath("/student");
 
   return {
     success: true,
-    message: `Order moved to ${toStatus}.`,
+    message: transitionSuccessMessage(result.data.status),
   };
 }

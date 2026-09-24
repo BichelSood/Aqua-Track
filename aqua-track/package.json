@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+  "dev": "next dev --experimental-https --experimental-https-key ./localhost+2-key.pem --experimental-https-cert ./localhost+2.pem",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "supabase:start": "PATH=\"$HOME/.docker/bin:/Applications/Docker.app/Contents/Resources/bin:$PATH\" supabase start",
+    "supabase:stop": "PATH=\"$HOME/.docker/bin:/Applications/Docker.app/Contents/Resources/bin:$PATH\" supabase stop",
+    "supabase:status": "PATH=\"$HOME/.docker/bin:/Applications/Docker.app/Contents/Resources/bin:$PATH\" supabase status",
+    "seed:local": "node scripts/seed-local-test-data.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -15,6 +19,7 @@
     "cn": "^0.4.0",
     "lucide-react": "^1.47.0",
     "next": "16.3.6",
+    "qr-scanner": "^1.4.2",
     "radix-ui": "^1.6.7",
     "react": "19.2.8",
     "react-dom": "19.2.8",

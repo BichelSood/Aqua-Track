@@ -1,8 +1,9 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { QRScanner } from "@/components/qr-scanner";
 import { collectBagAction, type CollectBagState } from "./actions";
 
 const initialState: CollectBagState = {
@@ -22,6 +23,12 @@ export function CollectBagForm({
     initialState,
   );
 
+  const [identifier, setIdentifier] = useState("");
+
+  function handleScan(value: string) {
+    setIdentifier(value);
+  }
+
   return (
     <form action={formAction} className="space-y-4">
       <input
@@ -30,32 +37,52 @@ export function CollectBagForm({
         value={pickupSessionId}
       />
 
+      <QRScanner onScan={handleScan} />
+
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full border-t" />
+        </div>
+
+        <div className="relative flex justify-center">
+          <span className="bg-background px-3 text-sm text-muted-foreground">
+            OR
+          </span>
+        </div>
+      </div>
+
       <div className="space-y-2">
         <label
-          htmlFor={`bag-code-${pickupSessionId}`}
+          htmlFor={`identifier-${pickupSessionId}`}
           className="text-sm font-medium"
         >
-          Bag Code
+          Roll Number
         </label>
 
         <Input
-          id={`bag-code-${pickupSessionId}`}
-          name="bagCode"
-          placeholder="e.g. BAG-TEST-002"
+          id={`identifier-${pickupSessionId}`}
+          name="identifier"
+          value={identifier}
+          onChange={(event) => setIdentifier(event.target.value)}
+          placeholder="Enter student roll number"
           autoComplete="off"
           required
         />
       </div>
 
-      <Button type="submit" disabled={pending} className="w-full">
-        {pending ? "Collecting..." : "Collect Bag"}
+      <Button
+        type="submit"
+        disabled={pending || !identifier.trim()}
+        className="w-full"
+      >
+        {pending ? "Collecting..." : "Collect Laundry"}
       </Button>
 
       {state.message ? (
         <p
           className={
             state.success
-              ? "text-sm text-green-600"
+              ? "text-sm text-success"
               : "text-sm text-destructive"
           }
         >

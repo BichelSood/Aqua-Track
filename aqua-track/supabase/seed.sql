@@ -1,0 +1,3 @@
+-- Local Auth users, bags, and pickups are created by:
+--   npm run seed:local
+-- That script writes supabase/local-test-roster.md for login and QR scanning.

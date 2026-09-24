@@ -5,7 +5,7 @@ export async function GET() {
   const user = await getCurrentUser();
   const profile = await getCurrentProfile();
 
-  if (!user) {
+  if (!user || !profile?.is_active) {
     return NextResponse.json(
       {
         authenticated: false,
@@ -20,6 +20,11 @@ export async function GET() {
       id: user.id,
       email: user.email,
     },
-    profile,
+    profile: {
+      id: profile.id,
+      fullName: profile.full_name,
+      role: profile.role,
+      isActive: profile.is_active,
+    },
   });
 }

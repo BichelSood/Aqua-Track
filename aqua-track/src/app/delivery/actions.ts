@@ -1,6 +1,8 @@
 "use server";
 
-import { collectBag } from "@/lib/operations/pickup";
+import { collectBag } from "@/services/pickup.service";
+import { fromZodError } from "@/lib/errors";
+import { scanBagSchema } from "@/lib/validation/schemas";
 
 export type CollectBagState = {
   success: boolean;
@@ -11,36 +13,29 @@ export async function collectBagAction(
   _previousState: CollectBagState,
   formData: FormData,
 ): Promise<CollectBagState> {
-  const bagCode = String(formData.get("bagCode") ?? "").trim();
-  const pickupSessionId = String(
-    formData.get("pickupSessionId") ?? "",
-  ).trim();
+  const parsed = scanBagSchema.safeParse({
+    identifier: String(formData.get("identifier") ?? ""),
+    pickupSessionId: String(formData.get("pickupSessionId") ?? ""),
+  });
 
-  if (!bagCode) {
+  if (!parsed.success) {
     return {
       success: false,
-      message: "Please enter a bag code.",
+      message: fromZodError(parsed.error).message,
     };
   }
 
-  if (!pickupSessionId) {
-    return {
-      success: false,
-      message: "Pickup session is required.",
-    };
-  }
-
-  const result = await collectBag(bagCode, pickupSessionId);
+  const result = await collectBag(parsed.data);
 
   if (!result.success) {
     return {
       success: false,
-      message: result.error,
+      message: result.error.message,
     };
   }
 
   return {
     success: true,
-    message: `Bag collected successfully. Order: ${result.orderNumber}`,
+    message: `Bag collected successfully. Order: ${result.data.orderNumber}`,
   };
 }

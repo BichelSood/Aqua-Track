@@ -41,7 +41,7 @@ export function TransitionButton({
         <p
           className={
             state.success
-              ? "text-sm text-green-600"
+              ? "text-sm text-success"
               : "text-sm text-destructive"
           }
         >
