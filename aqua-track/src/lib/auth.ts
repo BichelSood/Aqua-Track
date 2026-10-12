@@ -42,13 +42,24 @@ export async function getCurrentProfile(): Promise<AuthProfile | null> {
     return null;
   }
 
-  const { data: profile, error } = await supabase
+  let { data: profile, error } = await supabase
     .from("profiles")
     .select(
       "id, full_name, phone, role, hostel_id, facility_id, room_number, avatar_url, is_active, roll_number, created_at, updated_at",
     )
     .eq("id", user.id)
     .single();
+
+  if (error || !profile) {
+    const { data: repairedProfile } = await supabase.rpc(
+      "ensure_current_user_profile",
+    );
+
+    if (repairedProfile) {
+      profile = repairedProfile;
+      error = null;
+    }
+  }
 
   if (error || !profile) {
     return null;

@@ -66,11 +66,21 @@ export async function updateSession(request: NextRequest) {
     return response;
   }
 
-  const { data: profile } = await supabase
+  let { data: profile } = await supabase
     .from("profiles")
     .select("role, is_active")
     .eq("id", user.id)
     .single();
+
+  if (!profile) {
+    const { data: repairedProfile } = await supabase.rpc(
+      "ensure_current_user_profile",
+    );
+
+    if (repairedProfile) {
+      profile = repairedProfile;
+    }
+  }
 
   if (!profile?.is_active) {
     await supabase.auth.signOut();

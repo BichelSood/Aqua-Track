@@ -2,6 +2,7 @@
 
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { getPublicAppUrl } from "@/lib/app-url";
 import { createClient } from "@/lib/supabase/server";
 import { fromZodError } from "@/lib/errors";
 import {
@@ -54,11 +55,22 @@ export async function loginAction(
     return { success: false, message: "Unable to sign in." };
   }
 
-  const { data: profile, error: profileError } = await supabase
+  let { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select("role, is_active")
     .eq("id", user.id)
     .single();
+
+  if (profileError || !profile) {
+    const { data: repairedProfile } = await supabase.rpc(
+      "ensure_current_user_profile",
+    );
+
+    if (repairedProfile) {
+      profile = repairedProfile;
+      profileError = null;
+    }
+  }
 
   if (profileError || !profile) {
     await supabase.auth.signOut();
@@ -94,9 +106,7 @@ export async function signupAction(
     return { success: false, message: fromZodError(parsed.error).message };
   }
 
-  const headerStore = await headers();
-  const origin =
-    headerStore.get("origin") ?? process.env.NEXT_PUBLIC_APP_URL ?? "";
+  const origin = getPublicAppUrl(await headers());
 
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signUp({
@@ -145,9 +155,7 @@ export async function forgotPasswordAction(
     return { success: false, message: fromZodError(parsed.error).message };
   }
 
-  const headerStore = await headers();
-  const origin =
-    headerStore.get("origin") ?? process.env.NEXT_PUBLIC_APP_URL ?? "";
+  const origin = getPublicAppUrl(await headers());
 
   const supabase = await createClient();
   const { error } = await supabase.auth.resetPasswordForEmail(parsed.data.email, {
