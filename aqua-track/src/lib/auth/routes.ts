@@ -7,10 +7,12 @@ export const AUTH_UPDATE_PASSWORD_PATH = "/auth/update-password";
 export const AUTH_CALLBACK_PATH = "/auth/callback";
 
 export const PUBLIC_PATHS = [
+  
   AUTH_LOGIN_PATH,
   AUTH_SIGNUP_PATH,
   AUTH_FORGOT_PASSWORD_PATH,
   AUTH_CALLBACK_PATH,
+  "/",
   "/login",
   "/signup",
   "/api/health/supabase",

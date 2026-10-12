@@ -31,5 +31,5 @@ STUDENT,H3,Myra Dsouza,h3.09@aquatrack.local,H3-009,9031000009,H3-109,BAG-H3-09,
 STUDENT,H3,Varun Krishnan,h3.10@aquatrack.local,H3-010,9031000010,H3-110,BAG-H3-10,ed53d8689956475786e5911a4fbb7625,""
 DELIVERY_BOY,"",Suresh Kulkarni,d1@aquatrack.local,D-01,9888000001,"","","",""
 DELIVERY_BOY,"",Manoj Bhat,d2@aquatrack.local,D-02,9888000002,"","","",""
-WASHING_STAFF,"",Local Washing Staff,washing@aquatrack.local,"","","","","",""
-ADMIN,"",Local Admin,admin@aquatrack.local,"","","","","",""
+WASHING_STAFF,"",Local Washing Staff,washing@aquatrack.local,W-01,"","","","",""
+ADMIN,"",Local Admin,admin@aquatrack.local,A-01,"","","","",""
