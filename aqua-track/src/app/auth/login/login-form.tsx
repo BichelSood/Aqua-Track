@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import type { DemoCredentials } from "@/config/demo-credentials";
 import { AUTH_FORGOT_PASSWORD_PATH, AUTH_SIGNUP_PATH } from "@/lib/auth/routes";
 import { loginAction, type AuthFormState } from "../actions";
 
@@ -12,7 +13,13 @@ const initialState: AuthFormState = {
   message: "",
 };
 
-export function LoginForm({ errorCode }: { errorCode?: string }) {
+export function LoginForm({
+  errorCode,
+  demoCredentials,
+}: {
+  errorCode?: string;
+  demoCredentials?: DemoCredentials | null;
+}) {
   const [state, formAction, pending] = useActionState(loginAction, initialState);
 
   const inactiveMessage =
@@ -35,6 +42,7 @@ export function LoginForm({ errorCode }: { errorCode?: string }) {
           required
           autoComplete="email"
           placeholder="you@example.com"
+          defaultValue={demoCredentials?.email}
         />
       </div>
 
@@ -49,6 +57,7 @@ export function LoginForm({ errorCode }: { errorCode?: string }) {
           required
           autoComplete="current-password"
           placeholder="Your password"
+          defaultValue={demoCredentials?.password}
         />
       </div>
 

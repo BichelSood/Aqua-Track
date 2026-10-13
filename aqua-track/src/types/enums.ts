@@ -7,6 +7,14 @@ export const USER_ROLES = [
 
 export type UserRole = (typeof USER_ROLES)[number];
 
+export const MANAGED_USER_ROLES = [
+  "STUDENT",
+  "DELIVERY_BOY",
+  "WASHING_STAFF",
+] as const;
+
+export type ManagedUserRole = (typeof MANAGED_USER_ROLES)[number];
+
 export const LAUNDRY_STATUSES = [
   "COLLECTED",
   "RECEIVED_AT_FACILITY",

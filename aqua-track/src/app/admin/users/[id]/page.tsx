@@ -29,7 +29,8 @@ export default async function AdminUserDetailPage({
       <div>
         <h2 className="text-2xl font-semibold tracking-tight">{user.full_name}</h2>
         <p className="text-sm text-muted-foreground">
-          Role and assignment. Students use hostel; washing staff use facility.
+          Role and assignment. Only the main administrator can save role
+          changes. Admin accounts are managed separately.
         </p>
       </div>
       <UserEditForm user={user} hostels={hostels} facilities={facilities} />

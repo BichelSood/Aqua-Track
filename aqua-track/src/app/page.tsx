@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { getCurrentProfile } from "@/lib/auth";
 import { AUTH_LOGIN_PATH, AUTH_SIGNUP_PATH, getRoleHomePath } from "@/lib/auth/routes";
+import type { DemoRoleKey } from "@/config/demo-credentials";
 
 const features = [
   {
@@ -35,11 +36,36 @@ const workflow = [
 ];
 
 const demoRoles = [
-  { title: "Student", description: "Track laundry and view its status.", symbol: "01" },
-  { title: "Delivery Staff", description: "Manage collection and delivery.", symbol: "02" },
-  { title: "Washing Staff", description: "Update washing and processing stages.", symbol: "03" },
-  { title: "Administrator", description: "Oversee operations and system activity.", symbol: "04" },
-];
+  {
+    title: "Student",
+    description: "Track laundry and view its status.",
+    symbol: "01",
+    role: "student",
+  },
+  {
+    title: "Delivery Staff",
+    description: "Manage collection and delivery.",
+    symbol: "02",
+    role: "delivery",
+  },
+  {
+    title: "Washing Staff",
+    description: "Update washing and processing stages.",
+    symbol: "03",
+    role: "washing",
+  },
+  {
+    title: "Administrator",
+    description: "Oversee operations and system activity.",
+    symbol: "04",
+    role: "admin",
+  },
+] satisfies {
+  title: string;
+  description: string;
+  symbol: string;
+  role: DemoRoleKey;
+}[];
 
 export default async function HomePage() {
   const profile = await getCurrentProfile();
@@ -250,7 +276,13 @@ export default async function HomePage() {
               <span className="aqua-demo-number">{role.symbol}</span>
               <h3>{role.title}</h3>
               <p>{role.description}</p>
-              <Link href={AUTH_LOGIN_PATH} className="aqua-demo-link">
+              <Link
+                href={{
+                  pathname: AUTH_LOGIN_PATH,
+                  query: { role: role.role },
+                }}
+                className="aqua-demo-link"
+              >
                 Sign in as this role <span>↗</span>
               </Link>
             </article>
@@ -260,8 +292,8 @@ export default async function HomePage() {
         <div className="aqua-credentials-note">
           <span>ⓘ</span>
           <p>
-            Demo accounts and their credentials will be listed here after
-            the seeded Supabase accounts have been verified.
+            Select a role to prefill its demo credentials on the login page.
+            Click Login to continue.
           </p>
         </div>
       </section>

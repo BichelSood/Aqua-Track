@@ -1,11 +1,13 @@
 import { LoginForm } from "./login-form";
+import { getDemoCredentials } from "@/config/demo-credentials";
 
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; role?: string }>;
 }) {
-  const { error } = await searchParams;
+  const { error, role } = await searchParams;
+  const demoCredentials = getDemoCredentials(role);
 
   return (
     <>
@@ -18,7 +20,7 @@ export default async function LoginPage({
           Log in to track your laundry.
         </p>
       </div>
-      <LoginForm errorCode={error} />
+      <LoginForm errorCode={error} demoCredentials={demoCredentials} />
     </>
   );
 }

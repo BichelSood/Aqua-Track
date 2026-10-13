@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getUserRoleLabel } from "@/lib/labels";
-import { USER_ROLES } from "@/types";
+import { MANAGED_USER_ROLES } from "@/types";
 import { updateUserAction, type AdminFormState } from "../../actions";
 
 const initialState: AdminFormState = { success: false, message: "" };
@@ -29,6 +29,7 @@ export function UserEditForm({
     updateUserAction,
     initialState,
   );
+  const adminManagedExternally = user.role === "ADMIN";
 
   return (
     <form action={formAction} className="space-y-4 rounded-lg border p-4">
@@ -47,9 +48,13 @@ export function UserEditForm({
           id="role"
           name="role"
           defaultValue={user.role}
+          disabled={adminManagedExternally}
           className="h-9 w-full rounded-md border bg-transparent px-2 text-sm"
         >
-          {USER_ROLES.map((role) => (
+          {adminManagedExternally ? (
+            <option value="ADMIN">{getUserRoleLabel("ADMIN")}</option>
+          ) : null}
+          {MANAGED_USER_ROLES.map((role) => (
             <option key={role} value={role}>
               {getUserRoleLabel(role)}
             </option>
@@ -64,6 +69,7 @@ export function UserEditForm({
           id="isActive"
           name="isActive"
           defaultValue={user.is_active ? "true" : "false"}
+          disabled={adminManagedExternally}
           className="h-9 w-full rounded-md border bg-transparent px-2 text-sm"
         >
           <option value="true">Active</option>
@@ -106,9 +112,14 @@ export function UserEditForm({
           ))}
         </select>
       </div>
-      <Button type="submit" disabled={pending}>
+      <Button type="submit" disabled={pending || adminManagedExternally}>
         {pending ? "Saving..." : "Save user"}
       </Button>
+      {adminManagedExternally ? (
+        <p className="text-sm text-muted-foreground">
+          Admin accounts are managed through a trusted database process.
+        </p>
+      ) : null}
       {state.message ? (
         <p
           className={

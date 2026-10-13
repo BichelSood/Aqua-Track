@@ -1,7 +1,7 @@
 import { randomBytes } from "crypto";
 import { createClient } from "@/lib/supabase/server";
 import { toAppError } from "@/lib/errors";
-import type { AppResult, ComplaintStatus, UserRole } from "@/types";
+import type { AppResult, ComplaintStatus, ManagedUserRole } from "@/types";
 
 async function writeAudit(
   action: string,
@@ -21,7 +21,7 @@ async function writeAudit(
 export async function adminUpdateUser(input: {
   userId: string;
   fullName: string;
-  role: UserRole;
+  role: ManagedUserRole;
   isActive: boolean;
   hostelId?: string;
   facilityId?: string;
@@ -35,39 +35,20 @@ export async function adminUpdateUser(input: {
     return { success: false, error: toAppError("AUTHENTICATION_REQUIRED") };
   }
 
-  if (input.userId === user.id && !input.isActive) {
-    return {
-      success: false,
-      error: {
-        code: "FORBIDDEN",
-        message: "You cannot deactivate your own admin account.",
-      },
-    };
-  }
-
-  const { data, error } = await supabase
-    .from("profiles")
-    .update({
-      full_name: input.fullName,
-      role: input.role,
-      is_active: input.isActive,
-      hostel_id: input.hostelId ?? null,
-      facility_id: input.facilityId ?? null,
-    })
-    .eq("id", input.userId)
-    .select("id")
-    .single();
+  const { data, error } = await supabase.rpc("admin_update_user_profile", {
+    p_user_id: input.userId,
+    p_full_name: input.fullName,
+    p_role: input.role,
+    p_is_active: input.isActive,
+    p_hostel_id: input.hostelId ?? null,
+    p_facility_id: input.facilityId ?? null,
+  });
 
   if (error) {
     return { success: false, error: toAppError(error) };
   }
 
-  await writeAudit("ADMIN_UPDATED_USER", "profiles", data.id, {
-    role: input.role,
-    is_active: input.isActive,
-  });
-
-  return { success: true, data: { id: data.id } };
+  return { success: true, data: { id: data ?? input.userId } };
 }
 
 export async function adminCreateLocation(

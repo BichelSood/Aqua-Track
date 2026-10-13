@@ -10,7 +10,10 @@
     "supabase:start": "PATH=\"$HOME/.docker/bin:/Applications/Docker.app/Contents/Resources/bin:$PATH\" supabase start",
     "supabase:stop": "PATH=\"$HOME/.docker/bin:/Applications/Docker.app/Contents/Resources/bin:$PATH\" supabase stop",
     "supabase:status": "PATH=\"$HOME/.docker/bin:/Applications/Docker.app/Contents/Resources/bin:$PATH\" supabase status",
-    "seed:local": "node scripts/seed-local-test-data.mjs"
+    "seed:local": "node scripts/seed-local-test-data.mjs",
+    "seed:production-demo:dry-run": "node scripts/seed-production-demo-data.mjs --dry-run",
+    "seed:production-demo": "node scripts/seed-production-demo-data.mjs --apply --confirm-production-write",
+    "verify:production-demo": "node scripts/seed-production-demo-data.mjs --verify-only"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

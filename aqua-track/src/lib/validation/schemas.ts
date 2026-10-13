@@ -4,7 +4,6 @@ import {
   COMPLAINT_TYPES,
   DELIVERY_TRANSITION_TARGETS,
   LAUNDRY_STATUSES,
-  USER_ROLES,
   WASHING_TRANSITION_TARGETS,
 } from "@/types";
 
@@ -108,7 +107,7 @@ export const adminOverrideStatusSchema = z.object({
 export const adminUpdateUserSchema = z.object({
   userId: z.string().uuid("User is required."),
   fullName: z.string().trim().min(2).max(100),
-  role: z.enum(USER_ROLES),
+  role: z.enum(["STUDENT", "DELIVERY_BOY", "WASHING_STAFF"]),
   isActive: z.boolean(),
   hostelId: z.string().uuid().optional(),
   facilityId: z.string().uuid().optional(),

@@ -1,0 +1,85 @@
+{
+  "name": "Aqua Track production demo data",
+  "sourceFiles": [
+    "aqua_track_test_logins_and_qrs.pdf",
+    "aqua_track_test_qr_sheet.pdf"
+  ],
+  "expectedCounts": {
+    "accounts": 34,
+    "students": 30,
+    "staff": 4,
+    "bags": 30,
+    "activeOrders": 14,
+    "noActiveOrderStudents": 16
+  },
+  "hostels": [
+    { "code": "H1", "name": "Hostel H1", "address": "North campus block H1" },
+    { "code": "H2", "name": "Hostel H2", "address": "East campus block H2" },
+    { "code": "H3", "name": "Hostel H3", "address": "South campus block H3" }
+  ],
+  "facility": {
+    "code": "TEST-FACILITY",
+    "name": "Aqua Track Test Laundry Facility",
+    "address": "Production Demo Environment"
+  },
+  "staff": [
+    {
+      "email": "d1@aquatrack.local",
+      "fullName": "Suresh Kulkarni",
+      "role": "DELIVERY_BOY",
+      "rollNumber": "D-01",
+      "phone": "9888000001"
+    },
+    {
+      "email": "d2@aquatrack.local",
+      "fullName": "Manoj Bhat",
+      "role": "DELIVERY_BOY",
+      "rollNumber": "D-02",
+      "phone": "9888000002"
+    },
+    {
+      "email": "washing@aquatrack.local",
+      "fullName": "Local Washing Staff",
+      "role": "WASHING_STAFF",
+      "rollNumber": "W-01"
+    },
+    {
+      "email": "admin@aquatrack.local",
+      "fullName": "Local Admin",
+      "role": "ADMIN",
+      "rollNumber": "A-01"
+    }
+  ],
+  "students": [
+    { "email": "h1.01@aquatrack.local", "fullName": "Aisha Rahman", "hostelCode": "H1", "rollNumber": "H1-001", "roomNumber": "H1-101", "phone": "9011000001", "bagCode": "BAG-H1-01", "qrToken": "1ad4de5b147742edb1855169d9fff09c", "expectedStatus": null },
+    { "email": "h1.02@aquatrack.local", "fullName": "Kabir Sharma", "hostelCode": "H1", "rollNumber": "H1-002", "roomNumber": "H1-102", "phone": "9011000002", "bagCode": "BAG-H1-02", "qrToken": "658c1c74e6cb426db5e32f74957f68c4", "expectedStatus": null },
+    { "email": "h1.03@aquatrack.local", "fullName": "Meera Iyer", "hostelCode": "H1", "rollNumber": "H1-003", "roomNumber": "H1-103", "phone": "9011000003", "bagCode": "BAG-H1-03", "qrToken": "c5094f85227d4349842674de921843ad", "expectedStatus": null },
+    { "email": "h1.04@aquatrack.local", "fullName": "Dev Patel", "hostelCode": "H1", "rollNumber": "H1-004", "roomNumber": "H1-104", "phone": "9011000004", "bagCode": "BAG-H1-04", "qrToken": "d2280aebc90444efba787f6cd8da187a", "expectedStatus": null },
+    { "email": "h1.05@aquatrack.local", "fullName": "Sana Khan", "hostelCode": "H1", "rollNumber": "H1-005", "roomNumber": "H1-105", "phone": "9011000005", "bagCode": "BAG-H1-05", "qrToken": "71e04991f54f40a4a2557cdd879e1c44", "expectedStatus": null },
+    { "email": "h1.06@aquatrack.local", "fullName": "Rohan Gupta", "hostelCode": "H1", "rollNumber": "H1-006", "roomNumber": "H1-106", "phone": "9011000006", "bagCode": "BAG-H1-06", "qrToken": "b4534d19562141e486f31133234eb99f", "expectedStatus": null },
+    { "email": "h1.07@aquatrack.local", "fullName": "Nisha Verma", "hostelCode": "H1", "rollNumber": "H1-007", "roomNumber": "H1-107", "phone": "9011000007", "bagCode": "BAG-H1-07", "qrToken": "0ded2749eb204b2c8b7c3afb315e212d", "expectedStatus": null },
+    { "email": "h1.08@aquatrack.local", "fullName": "Aditya Joshi", "hostelCode": "H1", "rollNumber": "H1-008", "roomNumber": "H1-108", "phone": "9011000008", "bagCode": "BAG-H1-08", "qrToken": "8112ba9d69294945b8b2e9c7c15d368c", "expectedStatus": null },
+    { "email": "h1.09@aquatrack.local", "fullName": "Priya Nair", "hostelCode": "H1", "rollNumber": "H1-009", "roomNumber": "H1-109", "phone": "9011000009", "bagCode": "BAG-H1-09", "qrToken": "54701004dc194fbe9c5644ad965ebaf8", "expectedStatus": null },
+    { "email": "h1.10@aquatrack.local", "fullName": "Vikram Rao", "hostelCode": "H1", "rollNumber": "H1-010", "roomNumber": "H1-110", "phone": "9011000010", "bagCode": "BAG-H1-10", "qrToken": "a6e59c7477b04f739f75a924490ae37a", "expectedStatus": null },
+    { "email": "h2.01@aquatrack.local", "fullName": "Ananya Das", "hostelCode": "H2", "rollNumber": "H2-001", "roomNumber": "H2-101", "phone": "9021000001", "bagCode": "BAG-H2-01", "qrToken": "9564613524504fde812f9e06dce9a841", "expectedStatus": "COLLECTED" },
+    { "email": "h2.02@aquatrack.local", "fullName": "Farhan Ali", "hostelCode": "H2", "rollNumber": "H2-002", "roomNumber": "H2-102", "phone": "9021000002", "bagCode": "BAG-H2-02", "qrToken": "9de004384ee6417e848531548bd180c8", "expectedStatus": "COLLECTED" },
+    { "email": "h2.03@aquatrack.local", "fullName": "Kavya Reddy", "hostelCode": "H2", "rollNumber": "H2-003", "roomNumber": "H2-103", "phone": "9021000003", "bagCode": "BAG-H2-03", "qrToken": "376728e9441444f58718a0945f97a221", "expectedStatus": "RECEIVED_AT_FACILITY" },
+    { "email": "h2.04@aquatrack.local", "fullName": "Ishaan Malhotra", "hostelCode": "H2", "rollNumber": "H2-004", "roomNumber": "H2-104", "phone": "9021000004", "bagCode": "BAG-H2-04", "qrToken": "d8990d1a6953448db69d2fac4dbfdd1a", "expectedStatus": "RECEIVED_AT_FACILITY" },
+    { "email": "h2.05@aquatrack.local", "fullName": "Tara Singh", "hostelCode": "H2", "rollNumber": "H2-005", "roomNumber": "H2-105", "phone": "9021000005", "bagCode": "BAG-H2-05", "qrToken": "2fbfe709ee944bc69908c07b5e9e811c", "expectedStatus": "UNDER_WASHING" },
+    { "email": "h2.06@aquatrack.local", "fullName": "Nikhil Bose", "hostelCode": "H2", "rollNumber": "H2-006", "roomNumber": "H2-106", "phone": "9021000006", "bagCode": "BAG-H2-06", "qrToken": "d183d7607a7d4d6eadc197c5f40dcc42", "expectedStatus": "UNDER_WASHING" },
+    { "email": "h2.07@aquatrack.local", "fullName": "Riya Kapoor", "hostelCode": "H2", "rollNumber": "H2-007", "roomNumber": "H2-107", "phone": "9021000007", "bagCode": "BAG-H2-07", "qrToken": "43c6c23c744b45eab7e54a3989193473", "expectedStatus": null },
+    { "email": "h2.08@aquatrack.local", "fullName": "Sameer Qureshi", "hostelCode": "H2", "rollNumber": "H2-008", "roomNumber": "H2-108", "phone": "9021000008", "bagCode": "BAG-H2-08", "qrToken": "479d6f6987474fe0841beb3479a5b077", "expectedStatus": null },
+    { "email": "h2.09@aquatrack.local", "fullName": "Diya Menon", "hostelCode": "H2", "rollNumber": "H2-009", "roomNumber": "H2-109", "phone": "9021000009", "bagCode": "BAG-H2-09", "qrToken": "e917f232cabf46139bb877321e544982", "expectedStatus": null },
+    { "email": "h2.10@aquatrack.local", "fullName": "Arnav Pillai", "hostelCode": "H2", "rollNumber": "H2-010", "roomNumber": "H2-110", "phone": "9021000010", "bagCode": "BAG-H2-10", "qrToken": "4cfa2e5f61764955985ee99b555f5e87", "expectedStatus": null },
+    { "email": "h3.01@aquatrack.local", "fullName": "Zara Hussain", "hostelCode": "H3", "rollNumber": "H3-001", "roomNumber": "H3-101", "phone": "9031000001", "bagCode": "BAG-H3-01", "qrToken": "a7584295957b4894aa849fe37794a739", "expectedStatus": "READY_FOR_DELIVERY" },
+    { "email": "h3.02@aquatrack.local", "fullName": "Kunal Mehta", "hostelCode": "H3", "rollNumber": "H3-002", "roomNumber": "H3-102", "phone": "9031000002", "bagCode": "BAG-H3-02", "qrToken": "5bc1fc7564d845809cb0285cbd487ecf", "expectedStatus": "READY_FOR_DELIVERY" },
+    { "email": "h3.03@aquatrack.local", "fullName": "Lila Fernandes", "hostelCode": "H3", "rollNumber": "H3-003", "roomNumber": "H3-103", "phone": "9031000003", "bagCode": "BAG-H3-03", "qrToken": "d8b7b30d5a034acc812496f3a0d36336", "expectedStatus": "READY_FOR_DELIVERY" },
+    { "email": "h3.04@aquatrack.local", "fullName": "Harsh Vardhan", "hostelCode": "H3", "rollNumber": "H3-004", "roomNumber": "H3-104", "phone": "9031000004", "bagCode": "BAG-H3-04", "qrToken": "a1aab7da7f31483f8a763369340834ce", "expectedStatus": "READY_FOR_DELIVERY" },
+    { "email": "h3.05@aquatrack.local", "fullName": "Pooja Kulkarni", "hostelCode": "H3", "rollNumber": "H3-005", "roomNumber": "H3-105", "phone": "9031000005", "bagCode": "BAG-H3-05", "qrToken": "93d46db7944e4f7785970340d92ade6e", "expectedStatus": "OUT_FOR_DELIVERY" },
+    { "email": "h3.06@aquatrack.local", "fullName": "Yash Banerjee", "hostelCode": "H3", "rollNumber": "H3-006", "roomNumber": "H3-106", "phone": "9031000006", "bagCode": "BAG-H3-06", "qrToken": "52cb2f8004844b8c9db420f57f5cbc10", "expectedStatus": "OUT_FOR_DELIVERY" },
+    { "email": "h3.07@aquatrack.local", "fullName": "Anika Chawla", "hostelCode": "H3", "rollNumber": "H3-007", "roomNumber": "H3-107", "phone": "9031000007", "bagCode": "BAG-H3-07", "qrToken": "fe1b59d099684f6799946aa186b03657", "expectedStatus": "OUT_FOR_DELIVERY" },
+    { "email": "h3.08@aquatrack.local", "fullName": "Rehan Sheikh", "hostelCode": "H3", "rollNumber": "H3-008", "roomNumber": "H3-108", "phone": "9031000008", "bagCode": "BAG-H3-08", "qrToken": "804942ffc6a04649a69389687ff4fd84", "expectedStatus": "DELIVERY_ATTEMPTED" },
+    { "email": "h3.09@aquatrack.local", "fullName": "Myra Dsouza", "hostelCode": "H3", "rollNumber": "H3-009", "roomNumber": "H3-109", "phone": "9031000009", "bagCode": "BAG-H3-09", "qrToken": "defa791a70be4a7da3b46fc19d2354ce", "expectedStatus": null },
+    { "email": "h3.10@aquatrack.local", "fullName": "Varun Krishnan", "hostelCode": "H3", "rollNumber": "H3-010", "roomNumber": "H3-110", "phone": "9031000010", "bagCode": "BAG-H3-10", "qrToken": "ed53d8689956475786e5911a4fbb7625", "expectedStatus": null }
+  ]
+}

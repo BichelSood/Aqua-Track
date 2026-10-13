@@ -23,7 +23,7 @@ export default async function AdminUsersPage({
       <div>
         <h2 className="text-2xl font-semibold tracking-tight">Users</h2>
         <p className="text-sm text-muted-foreground">
-          Change roles, hostels, and active status.
+          Main-admin role management for students and operational staff.
         </p>
       </div>
 
